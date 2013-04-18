@@ -14,13 +14,8 @@ class User(db.Model):
     password = db.StringProperty()
     name = db.StringProperty()
 
-class ChatMessage(db.Model):
-    user = db.ReferenceProperty()
-    text = db.StringProperty()
-    created = db.DateTimeProperty(auto_now=True)
 
-
-def doRender(handler, tname='index.htm', values={}):
+def doRender(handler, tname='home.html', values={}):
     temp = os.path.join(
         os.path.dirname(__file__),
         'templates/' + tname)
@@ -130,47 +125,13 @@ class MembersHandler(webapp.RequestHandler):
         doRender(self, 'memberscreen.htm', {'user_list': user_list})
 
 
-class ChatHandler(webapp.RequestHandler):
-
-    # Retrieve the message
-    def get(self):
-        doRender(self, 'chatscreen.htm')
-
-    def post(self):
-        self.session = Session()
-        if not 'userkey' in self.session:
-            doRender(self,
-                'chatscreen.htm',
-                {'error': 'Must be logged in'})
-            return
-
-        msg = self.request.get('message')
-        if msg == '':
-            doRender(self,
-                'chat.htm',
-                {'error': 'Blank message ignored'})
-            return
-
-        newchat = ChatMessage(user=self.session['userkey'], text=msg)
-        newchat.put()
-        self.get()
-
-
-class MessagesHandler(webapp.RequestHandler):
-
-    def get(self):
-        que = db.Query(ChatMessage).order('-created')
-        chat_list = que.fetch(limit=100)
-        doRender(self, 'messagelist.htm', {'chat_list': chat_list})
-
-
 class MainHandler(webapp.RequestHandler):
     
     def get(self):
         path = self.request.path
         if doRender(self, path):
             return
-        doRender(self, 'index.htm')
+        doRender(self, 'home.html')
 
 
 def main():
@@ -180,8 +141,6 @@ def main():
             ('/logout', LogoutHandler),
             ('/apply', ApplyHandler),
             ('/members', MembersHandler),
-            ('/chat', ChatHandler),
-            ('/messages', MessagesHandler),
             ('/.*', MainHandler)
         ],
         debug=True)

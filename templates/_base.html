@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<!--[if IE 6]><html lang="ko" class="no-js old ie6"><![endif]-->
+<!--[if IE 7]><html lang="ko" class="no-js old ie7"><![endif]-->
+<!--[if IE 8]><html lang="ko" class="no-js old ie8"><![endif]-->
+<!--[if IE 9]><html lang="ko" class="no-js modern ie9"><![endif]-->
+<!--[if !IE]><!--><html lang="ko" class="no-js modern"><!--<![endif]-->
+<head>
+<meta charset="utf-8" />
+<title>Diotek Dictionary Team.</title>
+<link rel="stylesheet" href="/static/css/lavalamp.css" />
+<script src="/static/js/modernizr.min.js"></script>
+<script src="/static/js/jquery.min.js"></script>
+<script src="/static/js/jquery.UI.min.js"></script>
+<script src="/static/js/lavalamp.js"></script>
+</head>
+
+<body>
+<div id="header">
+    <h1>Diotek Dictionary Team.</h1>
+    <nav id="navigation">
+        <ul class="clearfix">
+            <li class="focus"><a href="home.html">Home</a></li>
+            {% if usernmae %}
+            <li><a href="/logout">Logout ({{ username }})</a></li>
+            {% else %}
+            <li><a href="">Login</a></li>
+            {% endif %}
+            {% if username %}
+            <li><a href="">Members</a></li>
+            {% endif %}
+            {% if username %}
+            <li><a href="">Events</a></li>
+            {% endif %}
+            <li><a href="">Dictionary</a></li>
+            <li><a href="">Contact</a></li>
+        </ul>
+    </nav>
+</div>
+
+<div id="content">
+    {% block content %}
+    {% endblock %}
+</div>
+</body>
+</html>

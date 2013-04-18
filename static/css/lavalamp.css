@@ -1,0 +1,86 @@
+@charset "utf-8";
+@import "reset.css";
+@import url(http://fonts.googleapis.com/css?family=Montez);
+
+/* lavalamp.nav.css - 라바 램프 네비게이션 디자인 스타일, 2012 © yamoo9.com
+------------------------------------------------------------------- */
+
+/* ///////////////////////////////////////// 
+	=기본 스타일
+///////////////////////////////////////// */	
+
+body {
+	background: #eeece7;
+}
+
+h1 {
+	font: 52px/1 'Montez';
+	color: #a4834d;
+}
+
+h1+p {
+	margin-bottom: 3.5em;
+}
+
+#header {
+	width: 960px;
+	margin: 30px auto;
+	padding: 3em;
+	background: #fff;
+	box-shadow: 0px 0px 2px #62615f inset;
+	border-radius: 20px;
+}
+
+#content {
+	width: 960px;
+	height: 420px;
+	margin: 30px auto;
+	padding: 3em;
+	background: #fff;
+	box-shadow: 0px 0px 2px #62615f inset;
+	border-radius: 20px;
+}
+
+/* ///////////////////////////////////////// 
+	=#nav
+///////////////////////////////////////// */	
+
+#navigation {
+	padding: 3px;
+	float: right;
+}
+	#navigation li {
+		border-right: 1px solid #eee;
+		float: left;
+	}
+	#navigation li:last-child {
+		border: 0;
+	}
+		#navigation li a {
+			border: 0;
+			padding: 10px;
+			font: 14px/1 Verdana;
+			color: #a49e96;
+		}
+		.no-js #navigation li a:hover,
+		.no-js #navigation li a:focus,
+		.no-js #navigation li.focus a,
+		.lava {
+			border-radius: 6px;
+			background-image: linear-gradient(-90deg, #887963, #0b0a09);
+			box-shadow: 0px 0px 2px #69635a;
+		}
+
+
+/* ///////////////////////////////////////// 
+	=Global Classes
+///////////////////////////////////////// */
+
+.clearfix:after {
+	content: "";
+	display: block;
+	clear: both;
+	}
+	.ie6 .clearfix { height: 1%; } /* IE6 */ 
+	.ie7 .clearfix { min-height: 1px; } /* IE7 */
+
