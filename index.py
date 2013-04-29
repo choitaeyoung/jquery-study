@@ -38,7 +38,7 @@ def doRender(handler, tname='home.html', values={}):
 class LoginHandler(webapp.RequestHandler):
 
     def get(self):
-        doRender(self, 'loginscreen.htm')
+        doRender(self, 'loginscreen.html')
 
     def post(self):
         self.session = Session()
@@ -52,7 +52,7 @@ class LoginHandler(webapp.RequestHandler):
         if pw == '' or acct == '':
             doRender(
                 self,
-                'loginscreen.htm',
+                'loginscreen.html',
                 {'error': 'Please specify Acct and PW'})
             return
 
@@ -66,12 +66,12 @@ class LoginHandler(webapp.RequestHandler):
             user = results[0]
             self.session['userkey'] = user.key()
             self.session['username'] = acct
-            doRender(self, 'loggedin.htm', {})
+            doRender(self, 'loggedin.html', {})
 
         else:
             doRender(
                 self,
-                'loginscreen.htm',
+                'loginscreen.html',
                 {'error': 'Incorret password'})
 
 
