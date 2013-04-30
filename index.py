@@ -125,6 +125,14 @@ class MembersHandler(webapp.RequestHandler):
         doRender(self, 'memberscreen.html', {'user_list': user_list})
 
 
+class DictionaryHandler(webapp.RequestHandler):
+
+    def get(self):
+        que = db.Query(User)
+        user_list = que.fetch(limit=100)
+        doRender(self, 'dictionaries.html', {})
+
+
 class MainHandler(webapp.RequestHandler):
     
     def get(self):
@@ -141,6 +149,7 @@ def main():
             ('/logout', LogoutHandler),
             ('/apply', ApplyHandler),
             ('/members', MembersHandler),
+            ('/dictionary', DictionaryHandler),
             ('/.*', MainHandler)
         ],
         debug=True)
