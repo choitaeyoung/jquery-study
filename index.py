@@ -81,13 +81,13 @@ class LogoutHandler(webapp.RequestHandler):
         self.session = Session()
         self.session.delete_item('username')
         self.session.delete_item('userkey')
-        doRender(self, 'index.htm')
+        doRender(self, 'home.html')
 
 
 class ApplyHandler(webapp.RequestHandler):
 
     def get(self):
-        doRender(self, 'applyscreen.htm')
+        doRender(self, 'applyscreen.html')
 
     def post(self):
         self.session = Session()
@@ -97,7 +97,7 @@ class ApplyHandler(webapp.RequestHandler):
         logging.info('Adding account = ' + acct)
 
         if pw == '' or acct == '' or name == '':
-            doRender(self, 'applyscreen.htm', {'error': 'Please fill in all fields'})
+            doRender(self, 'applyscreen.html', {'error': 'Please fill in all fields'})
             return
 
         # Check wether the user already exists
@@ -106,7 +106,7 @@ class ApplyHandler(webapp.RequestHandler):
         results = que.fetch(limit=1)
 
         if len(results) > 0:
-            doRender(self, 'applyscreen.htm', {'error': 'Account Already Exists'})
+            doRender(self, 'applyscreen.html', {'error': 'Account Already Exists'})
             return
 
         # Create the User object and log the user in
@@ -114,7 +114,7 @@ class ApplyHandler(webapp.RequestHandler):
         pkey = newuser.put();
         self.session['username'] = acct
         self.session['userkey'] = pkey
-        doRender(self, 'index.htm', {})
+        doRender(self, 'home.html', {})
 
 
 class MembersHandler(webapp.RequestHandler):
@@ -122,7 +122,7 @@ class MembersHandler(webapp.RequestHandler):
     def get(self):
         que = db.Query(User)
         user_list = que.fetch(limit=100)
-        doRender(self, 'memberscreen.htm', {'user_list': user_list})
+        doRender(self, 'memberscreen.html', {'user_list': user_list})
 
 
 class MainHandler(webapp.RequestHandler):
